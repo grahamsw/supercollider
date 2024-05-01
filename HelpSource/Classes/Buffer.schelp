@@ -330,7 +330,7 @@ code::
 s.boot;
 (
 a = Array.fill(2000000,{ rrand(0.0,1.0) }); // a LARGE collection
-b = Buffer.sendCollection(s, a, 1, 0, {arg buf; "finished".postln;});
+b = Buffer.sendCollection(s, a, 1, 0, {|buf| "finished".postln});
 )
 b.get(1999999, {|msg| (msg == a[1999999]).postln});
 b.free;
@@ -647,7 +647,7 @@ b = Buffer.alloc(s, 128);
 (
 b.loadCollection(v, action: {|buf|
 	x = { PlayBuf.ar(buf.numChannels, buf, BufRateScale.kr(buf), loop: 1)
-		* 0.2 }.play;
+		* 0.2 }.play
 });
 )
 x.free; b.free;
@@ -687,7 +687,7 @@ s.boot;
 a = Array.fill(2000000,{ rrand(0.0,1.0) });
 b = Buffer.alloc(s, 2000000);
 )
-b = b.sendCollection(a, action: {arg buf; "finished".postln;});
+b = b.sendCollection(a, action: {|buf| "finished".postln});
 b.get(1999999, {|msg| (msg == a[1999999]).postln});
 b.free;
 ::
